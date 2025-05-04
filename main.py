@@ -12,7 +12,7 @@ class ParserApp(tk.Tk):
         self.label1 = tk.Label(text='Введіть у текстове поле нижче адресу для парсингу', font=('Arial', 18), fg='red')
         self.link = tk.Entry(self, width=50)
         
-        self.button = tk.Button(text='Дістати дані', command=self.parse_data)
+        self.button = tk.Button(text='Обробити', command=self.parse_data)
         
         self.label.pack()
         self.label1.pack()
@@ -51,15 +51,14 @@ class ParserApp(tk.Tk):
                 self.text.insert(tk.END, self.data.text)
                 
             elif self.var.get()  == 1:
-                self.data = requests.post()
+                self.data = requests.post(self.input_text, data=self.payload)
             elif self.var.get()  == 2:
-                self.data = requests.put()
+                self.data = requests.put(self.input_text, data=self.payload)
             elif self.var.get() == 3:
-                self.data = requests.delete()
+                self.data = requests.delete(self.input_text)
         except requests.RequestException as e:
             self.text.insert(tk.END, e)
-            
-    
+
             
         
 
